@@ -7,5 +7,40 @@
 </head>
 <body>
     <p>Hei, mitt navn er Siri. Jeg er utdannet dataingeniør ved Høgskulen på Vestlandet og jobber i dag som utvikler.</p>
+    
+    <h1>Federation Lookup Test</h1>
+    <button id="testRequest">Send Request</button>
+    <div id="response"></div>
+  
+    <script>
+        var counter = 0
+        async function fetchFederationData() {
+          const federationServer = "https://lobstr.co/federation/"; // Replace with the real server
+          const gAddress = "GDV7HGDG4LKDIQHE7P3FJGDEELZNITWEP7RORGAUKOXRPT2Z67I6SQQW";
+    
+          const params = new URLSearchParams({
+            q: gAddress,
+            type: "id"
+          });
+    
+          try {
+            const response = await fetch(`${federationServer}?${params.toString()}`);
+            if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+            const data = await response.json();
+            document.getElementById('response').innerText = `counter: ${counter}: ${JSON.stringify(data, null, 2)}`;
+          } catch (error) {
+            document.getElementById('response').innerText = `counter: ${counter}: Error: ${error.message}`;
+          }
+          counter++;
+        }
+    
+        // Call the function every 2 minutes
+        setInterval(fetchFederationData, 120000);
+    
+        // Optionally, call it immediately on page load
+        fetchFederationData();
+      </script>
+
+
 </body>
 </html>
