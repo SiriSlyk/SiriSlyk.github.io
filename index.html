@@ -27,9 +27,9 @@
             const response = await fetch(`${federationServer}?${params.toString()}`);
             if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
             const data = await response.json();
-            document.getElementById('response').innerText = `counter: ${counter}: ${JSON.stringify(data, null, 2)}`;
+            document.getElementById('response').innerText = `counter: ${counter}: ${JSON.stringify(data, null, 2)}, ${Date.now()}`;
           } catch (error) {
-            document.getElementById('response').innerText = `counter: ${counter}: Error: ${error.message}`;
+            document.getElementById('response').innerText = `counter: ${counter}: Error: ${error.message}, ${Date.now()}`;
           }
           counter++;
         }
