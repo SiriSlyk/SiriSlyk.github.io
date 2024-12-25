@@ -1,0 +1,74 @@
+/* Apply a background color to the full page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    background-color: #999; /* Full-page background color */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
+  }
+  
+  /* Center the h1 and add spacing below it */
+  h1 {
+    color: white; /* White text color for contrast */
+    text-align: center; /* Center align the text */
+    margin-top: 20px; /* Add some space at the top */
+    margin-bottom: 20px; /* Add space between h1 and the container */
+  }
+  
+  /* Style for the content section */
+  .content {
+    width: 100%; /* Make the content span the full width of the page */
+    max-width: 1200px; /* Limit the width for large screens */
+    padding: 0 20px; /* Add padding for small screens */
+    box-sizing: border-box; /* Ensure padding is included in the total width */
+  }
+  
+  /* Grid container styles */
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive tiles */
+    gap: 20px; /* Space between tiles */
+    width: 100%; /* Ensure the container spans the full width */
+  }
+  
+  /* Tile styles */
+  .container .tile {
+    background-color: #ecf0f1; /* Light gray background */
+    border-radius: 5px; /* Rounded corners */
+    padding: 20px; /* Internal padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .container .tile:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+  }
+  
+  /* Optional: Ensure tiles' content is styled properly */
+  .container .header {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .container .balance {
+    background-color: #2ecc71;
+    color: white;
+    padding: 15px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 5px;
+  }
+/* Loading message styles */
+#loading-message {
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    margin: 20px 0;
+  }

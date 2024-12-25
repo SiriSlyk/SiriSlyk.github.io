@@ -3,43 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Hjem</title>
 </head>
 <body>
-    <p>Hei, mitt navn er Siri. Jeg er utdannet dataingeniør ved Høgskulen på Vestlandet og jobber i dag som utvikler.</p>
+    <h1>TEST</h1>
     
-    <h1>Federation Lookup Test</h1>
-    <button id="testRequest">Send Request</button>
-    <div id="response"></div>
+    
+    <div class="content">
+        <div class="container" id="grid-container">
+    </div>
   
-    <script>
-        var counter = 0
-        async function fetchFederationData() {
-          const federationServer = "https://lobstr.co/federation/"; // Replace with the real server
-          const gAddress = "GDV7HGDG4LKDIQHE7P3FJGDEELZNITWEP7RORGAUKOXRPT2Z67I6SQQW";
-    
-          const params = new URLSearchParams({
-            q: gAddress,
-            type: "id"
-          });
-    
-          try {
-            const response = await fetch(`${federationServer}?${params.toString()}`);
-            if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
-            const data = await response.json();
-            document.getElementById('response').innerText = `counter: ${counter}: ${JSON.stringify(data, null, 2)}, ${Date.now()}`;
-          } catch (error) {
-            document.getElementById('response').innerText = `counter: ${counter}: Error: ${error.message}, ${Date.now()}`;
-          }
-          counter++;
-        }
-    
-        // Call the function every 2 minutes
-        setInterval(fetchFederationData, 120000);
-    
-        // Optionally, call it immediately on page load
-        fetchFederationData();
-      </script>
+    <script src="js/script.js"></script>
 
 
 </body>
