@@ -2,10 +2,15 @@
 async function fetchFederationData() {
   const federationServer = "https://lobstr.co/federation/"; // Replace with the real server
   const gridContainer = document.getElementById('grid-container');
+  const lastUpdated = document.getElementById('timestamp');
+  lastUpdated.innerHTML = `Last updated: ${new Date(Date.now()).toLocaleString()}`;
+  const tilesData = [];
+
+  gridContainer.innerHTML = "";
   const res = {}
   const gAddresses = [
     "GDV7HGDG4LKDIQHE7P3FJGDEELZNITWEP7RORGAUKOXRPT2Z67I6SQQW",
-    /*"GAVD4E4LKUYPOOO67MXIK6PUDDREC7BRPACXH7JLVI74DCIQ6XQ3ZBU3",
+    "GAVD4E4LKUYPOOO67MXIK6PUDDREC7BRPACXH7JLVI74DCIQ6XQ3ZBU3",
     "GC5SCPJLHX6WFLUG2GF2W57R4LQ4QUEJEXFOXSZTBSGNUD6RJW2ZX4D3",
     "GCRLUZQQKPUB64BA2LYZAMMXSNB5T7GDTHTVBP4XMHPFCXPKVZCPIS4K",
     "GAFQBCA4JSNKGQU5QL5RPIKHI5LOPKU2QSVR7G4AR3J7B5DV35ZUWOEC",
@@ -24,7 +29,7 @@ async function fetchFederationData() {
     "GBT5UPFISSRKJ3HLNURISPGEXSA2PQTLDW5L6LJNKU553NHM3ITDMLS7",
     "GCD22HCPSUAZKW47KR2PP456XRESCOSEVKWOH3JNTER56CVLOP4WCGEF",
     "GBKCHJYIY2G2NQBMJE6ULB4474HLPUDQN2H24BFLOZXUFIFXV5X2WQND",
-    "GCPLQKNVMMTSL2SMUALMBMEXNFG3SWGLQFQMDHXBU6NFJILU564WDV5M",*/
+    "GCPLQKNVMMTSL2SMUALMBMEXNFG3SWGLQFQMDHXBU6NFJILU564WDV5M",
     "GANN23MBYYEVDAKHHW7YAN35WNTX4QIFUT7MH5NTZALGEYU5T74JGSCQ"
   ];
   for (let i = 0; i < gAddresses.length; i++) {
@@ -55,50 +60,46 @@ async function fetchFederationData() {
           break;
         }
         
-        
       }
-      
-      res[gAddress] = ([fed, balance])
-
+      //parseToTile(gAddress, [fed, balance], gridContainer)
+      tilesData.push({
+        address: gAddress,
+        fed: fed,
+        balance: balance
+    })
 
     } catch (error) {
       console.log(error.message);
-      //document.getElementById('response').innerText = `counter: ${counter}: Error: ${error.message}, ${Date.now()}`;
     }
-    // string = ""
-    // for (let key in res) {
-    // string += `${res[key]}\n`;
-    // }
-      
-    // document.getElementById('response').innerText = `${string}`;
-
-    
-
-
   };
-  gridContainer.innerHTML = "";
-  for (let key in res) {
+
+  tilesData.sort((a, b) => parseFloat(b.balance) - parseFloat(a.balance));
+  
+  tilesData.forEach(tileData => {
     // Create the tile container
     const tile = document.createElement('div');
     tile.classList.add('tile');
-  
+
     // Create the header
     const header = document.createElement('div');
     header.classList.add('header');
-    header.textContent = res[key][0];
-  
+    header.textContent = tileData.fed; // Use the 'fed' value for the header
+
     // Create the balance
     const balance = document.createElement('div');
     balance.classList.add('balance');
-    balance.textContent = `${parseFloat(res[key][1]).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} XLM`;
-  
+    balance.textContent = `${parseFloat(tileData.balance).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} XLM`;
+
     // Append the header and balance to the tile
     tile.appendChild(header);
     tile.appendChild(balance);
-  
+
     // Append the tile to the grid container
     gridContainer.appendChild(tile);
-  };
+});
+
+  
+
   
 }
 
