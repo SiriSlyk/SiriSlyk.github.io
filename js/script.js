@@ -3,7 +3,7 @@ async function fetchFederationData() {
   const federationServer = "https://lobstr.co/federation/"; // Replace with the real server
   const gridContainer = document.getElementById('grid-container');
   const lastUpdated = document.getElementById('timestamp');
-  lastUpdated.innerHTML = `Last updated: ${new Date(Date.now()).toLocaleString()}`;
+  lastUpdated.innerHTML = `Loading...`;
   const tilesData = [];
 
   gridContainer.innerHTML = "";
@@ -97,6 +97,7 @@ async function fetchFederationData() {
     // Append the tile to the grid container
     gridContainer.appendChild(tile);
 });
+lastUpdated.innerHTML = `Last updated: ${new Date(Date.now()).toLocaleString()}`;
 
   
 
