@@ -103,8 +103,8 @@ async function fetchFederationData() {
   
 }
 
-// Call the function every 2 minutes
-setInterval(fetchFederationData, 120000);
+// Call the function every 10 minutes
+setInterval(fetchFederationData, 600000);
 
 // Optionally, call it immediately on page load
 fetchFederationData();
