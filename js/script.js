@@ -9,7 +9,7 @@ async function fetchFederationData() {
   gridContainer.innerHTML = "";
   const res = {}
   const gAddresses = [
-    "GDV7HGDG4LKDIQHE7P3FJGDEELZNITWEP7RORGAUKOXRPT2Z67I6SQQW",
+    /*"GDV7HGDG4LKDIQHE7P3FJGDEELZNITWEP7RORGAUKOXRPT2Z67I6SQQW",
     "GAVD4E4LKUYPOOO67MXIK6PUDDREC7BRPACXH7JLVI74DCIQ6XQ3ZBU3",
     "GC5SCPJLHX6WFLUG2GF2W57R4LQ4QUEJEXFOXSZTBSGNUD6RJW2ZX4D3",
     "GCRLUZQQKPUB64BA2LYZAMMXSNB5T7GDTHTVBP4XMHPFCXPKVZCPIS4K",
@@ -30,10 +30,28 @@ async function fetchFederationData() {
     "GCD22HCPSUAZKW47KR2PP456XRESCOSEVKWOH3JNTER56CVLOP4WCGEF",
     "GBKCHJYIY2G2NQBMJE6ULB4474HLPUDQN2H24BFLOZXUFIFXV5X2WQND",
     "GCPLQKNVMMTSL2SMUALMBMEXNFG3SWGLQFQMDHXBU6NFJILU564WDV5M",
-    "GANN23MBYYEVDAKHHW7YAN35WNTX4QIFUT7MH5NTZALGEYU5T74JGSCQ"
+    "GANN23MBYYEVDAKHHW7YAN35WNTX4QIFUT7MH5NTZALGEYU5T74JGSCQ"*/
+    ["GCN53ZLABTZ63TMH7YAPA6ACQXYZ7UNQ5R5XUK6B7HS3NTTGKV2LBBWX", "Moon Bun Bun"],
+    ["GCPLQKNVMMTSL2SMUALMBMEXNFG3SWGLQFQMDHXBU6NFJILU564WDV5M", "QAZ"],
+    ["GAVD4E4LKUYPOOO67MXIK6PUDDREC7BRPACXH7JLVI74DCIQ6XQ3ZBU3", "?"],
+    ["GDV7HGDG4LKDIQHE7P3FJGDEELZNITWEP7RORGAUKOXRPT2Z67I6SQQW", "?"],
+    ["GDFJWYIIH32FEXPRNEJCK7C632XT4UCHSDTFKZOXZSXA73IKRPM2QKPM", "Alexei #1"],
+    ["GCMYWBB6YZ45NWC6MDPEKO2KMKBANNZRRDNMFHHPAKQTN4GC7LJFBG5E", "Alexei #2"],
+    ["GAAXMMGRVBXKXVGU4DK4ZMRBZZZQSMIW4X2LW5V5DVPSQJKI3DG55PKB", "Lumensier"],
+    ["GDXTJYSDL4AOGB3WT4BG3LAV5KJGASHD274UC22WGRKSWESQYERWO63C", "Mr. Dot House"],
+    ["GA32RD7M3DEZ4EWK5ULLY4VHXW7OWGTJO47PKO4232NHXBTUKVEMTKOD", "Mr. Potato head"],
+    ["GAFQBCA4JSNKGQU5QL5RPIKHI5LOPKU2QSVR7G4AR3J7B5DV35ZUWOEC", "Stellar Russia"],
+    ["GAEJNNXAYFWSHTQOWCWCKCFCGILAMZMRLVFPRUQIIBUDWFRRXL3A3D7K", "Synergi"],
+    ["GDCFG6KLZJIQEB6ED4UWROPNNEGJDMLY46KUV3FTBXFS6DCUJ3SN7HI5", "Token Fundation"],
+    ["GDIKMIUVR5D2RTPXS2KFKD3VMQQ3AFSCYYEATKYWFXJUZSMSEZ3OFOXG", "Vanguard"],
+    ["GBKCHJYIY2G2NQBMJE6ULB4474HLPUDQN2H24BFLOZXUFIFXV5X2WQND", "White Hat Home"],
+    ["GABW4NGFOLUK7DB4UCRLZATFWLQQNPLQU6TDP5PHYG632WW3JHB4CDRH", "William"]
+
   ];
   for (let i = 0; i < gAddresses.length; i++) {
-    var gAddress = gAddresses[i]
+    var developer = gAddresses[i][1]
+    var gAddress = gAddresses[i][0]
+    console.log(gAddress)
     const params = new URLSearchParams({
       q: gAddress,
       type: "id"
@@ -65,7 +83,8 @@ async function fetchFederationData() {
       tilesData.push({
         address: gAddress,
         fed: fed,
-        balance: balance
+        balance: balance,
+        developer: developer
     })
 
     } catch (error) {
@@ -85,6 +104,10 @@ async function fetchFederationData() {
     header.classList.add('header');
     header.textContent = tileData.fed; // Use the 'fed' value for the header
 
+    const dev = document.createElement('div');
+    dev.classList.add('developer');
+    dev.textContent = tileData.developer; // developer
+
     // Create the balance
     const balance = document.createElement('div');
     balance.classList.add('balance');
@@ -93,6 +116,7 @@ async function fetchFederationData() {
     // Append the header and balance to the tile
     tile.appendChild(header);
     tile.appendChild(balance);
+    tile.appendChild(dev);
 
     // Append the tile to the grid container
     gridContainer.appendChild(tile);
